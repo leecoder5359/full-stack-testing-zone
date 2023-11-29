@@ -1,19 +1,19 @@
 import { CommonBigPkEntity } from '../../common/entity/common-big-pk.entity';
-import { Column, Entity, JoinColumn, ManyToMany, ManyToOne } from 'typeorm';
+import { Column, Entity, JoinColumn, JoinTable, ManyToMany, ManyToOne, OneToMany } from 'typeorm';
 import { User } from '../../user/entity/user.entity';
-import { Menu } from '../../store/entity/menu.entity';
-import { Store } from '../../store/entity/store.entity';
+import { Menu } from '../../menu/entity/menu.entity';
+import { Store } from '../../store/repository/entity/store.entity';
 import { RatingEnum } from './rating.enum';
 
 @Entity()
 export class Review extends CommonBigPkEntity {
-    @Column()
+    @Column({ nullable: true })
     like: boolean;
 
-    @Column()
+    @Column({ nullable: true })
     dislike: boolean;
 
-    @Column('enum', {enum: RatingEnum})
+    @Column('enum', { enum: RatingEnum })
     rating: RatingEnum;
 
     @Column()
@@ -23,7 +23,7 @@ export class Review extends CommonBigPkEntity {
         type: 'text',
         array: true,
     })
-    image: string[];
+    images: string[];
 
     @ManyToOne(() => User, (user) => user.reviews)
     @JoinColumn({ name: 'user_id' })
@@ -33,6 +33,7 @@ export class Review extends CommonBigPkEntity {
     @JoinColumn({ name: 'store_id' })
     store: Store;
 
-    @ManyToMany(() => Menu, (menu) => menu.reviews)
-    menus: Menu[];
+    @ManyToOne(() => Menu, (menu) => menu.reviews)
+    @JoinColumn({ name: 'menu_id' })
+    menu: Menu;
 }

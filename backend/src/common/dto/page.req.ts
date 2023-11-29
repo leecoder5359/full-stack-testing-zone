@@ -2,7 +2,7 @@ import { ApiPropertyOptional } from '@nestjs/swagger';
 import { Transform } from 'class-transformer';
 import { IsInt } from 'class-validator';
 
-export class PageReqDto {
+export class PageReq {
     @ApiPropertyOptional({ description: '페이지. default = 20' })
     @Transform((params) => Number(params.value))
     @IsInt()

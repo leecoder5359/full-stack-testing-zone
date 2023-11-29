@@ -1,14 +1,27 @@
 import { Module } from '@nestjs/common';
-import { StoreController } from './store.controller';
-import { StoreService } from './store.service';
+import { StoreController } from './controller/store.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Store } from './entity/store.entity';
-import { Menu } from './entity/menu.entity';
+import { Store } from './repository/entity/store.entity';
+import { StorePresenterMapper } from './mapper/store.presenter.mapper';
+import { StorePersistenceMapper } from './mapper/store.persistence.mapper';
+import { STORE_REPOSITORY, StoreRepository } from './repository/store.repository';
+import { STORE_SERVICE } from './service/interface/store-service.interface';
+import { StoreService } from './service/store.service';
 
 @Module({
-    imports: [TypeOrmModule.forFeature([Store, Menu])],
+    imports: [TypeOrmModule.forFeature([Store])],
     controllers: [StoreController],
-    providers: [StoreService],
+    providers: [
+        {
+            provide: STORE_SERVICE,
+            useClass: StoreService,
+        },
+        {
+            provide: STORE_REPOSITORY,
+            useClass: StoreRepository,
+        },
+        StorePresenterMapper,
+        StorePersistenceMapper,
+    ],
 })
-export class StoreModule {
-}
+export class StoreModule {}

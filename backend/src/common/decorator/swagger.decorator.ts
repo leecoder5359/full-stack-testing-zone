@@ -1,6 +1,6 @@
 import { applyDecorators, Type } from '@nestjs/common';
 import { ApiCreatedResponse, ApiOkResponse, getSchemaPath } from '@nestjs/swagger';
-import { PageResDto } from '../dto/res.dto';
+import { PageRes } from '../dto/page.res';
 
 export const ApiGetResponse = <T extends Type<any>>(model: T) => {
     return applyDecorators(
@@ -27,7 +27,7 @@ export const ApiGetItemsResponse = <T extends Type<any>>(model: T) => {
         ApiOkResponse({
             schema: {
                 allOf: [
-                    { $ref: getSchemaPath(PageResDto) },
+                    { $ref: getSchemaPath(PageRes) },
                     {
                         properties: {
                             items: {

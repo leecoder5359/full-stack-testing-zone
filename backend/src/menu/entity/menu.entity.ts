@@ -1,15 +1,23 @@
-import { Column, Entity, JoinColumn, ManyToMany, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
-import { Store } from './store.entity';
+import {
+    Column,
+    Entity,
+    JoinColumn,
+    ManyToOne,
+    OneToMany,
+    OneToOne,
+} from 'typeorm';
+import { Store } from '../../store/repository/entity/store.entity';
 import { OrderMenu } from '../../order/entity/order-menu.entity';
 import { CommonBigPkEntity } from '../../common/entity/common-big-pk.entity';
 import { Review } from '../../review/entity/review.entity';
+import { AdditionalMenu } from './additional-menu.entity';
 
 @Entity()
 export class Menu extends CommonBigPkEntity {
     @Column()
     name: string;
 
-    @Column()
+    @Column({nullable: true})
     description: string;
 
     @Column()
@@ -36,14 +44,16 @@ export class Menu extends CommonBigPkEntity {
     @Column()
     dislikeCount: number;
 
+    @OneToMany(() => AdditionalMenu, (additionalMenu) => additionalMenu.menu, { cascade: true })
+    additionalMenus: AdditionalMenu[];
+
     @ManyToOne(() => Store, (store) => store.menus)
     @JoinColumn({ name: 'store_id' })
     store: Store;
 
-    @ManyToOne(() => OrderMenu, (orderMenu) => orderMenu.menus)
-    @JoinColumn({ name: 'order_menu_id' })
+    @OneToOne(() => OrderMenu, (orderMenu) => orderMenu.menu)
     orderMenu: OrderMenu;
 
-    @ManyToMany(() => Review, (review) => review.menus)
-    reviews: Review;
+    @OneToMany(() => Review, (review) => review.menu)
+    reviews: Review[];
 }

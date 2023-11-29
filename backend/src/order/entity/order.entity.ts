@@ -9,7 +9,7 @@ import {
 import { DeliveryStatusEnum } from './delivery-status.enum';
 import { User } from '../../user/entity/user.entity';
 import { OrderMenu } from './order-menu.entity';
-import { Store } from '../../store/entity/store.entity';
+import { Store } from '../../store/repository/entity/store.entity';
 import { CommonBigPkEntity } from '../../common/entity/common-big-pk.entity';
 
 @Entity()

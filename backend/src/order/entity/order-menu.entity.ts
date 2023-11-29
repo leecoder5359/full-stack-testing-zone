@@ -1,5 +1,5 @@
-import { Menu } from '../../store/entity/menu.entity';
-import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { Menu } from '../../menu/entity/menu.entity';
+import { Column, Entity, JoinColumn, ManyToOne, OneToMany, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { Order } from './order.entity';
 import { CommonBigPkEntity } from '../../common/entity/common-big-pk.entity';
 
@@ -12,6 +12,6 @@ export class OrderMenu extends CommonBigPkEntity {
     @JoinColumn({ name: 'order_id' })
     order: Order;
 
-    @OneToMany(() => Menu, (menu) => menu.orderMenu)
-    menus: Menu[];
+    @OneToOne(() => Menu, (menu) => menu.orderMenu)
+    menu: Menu;
 }

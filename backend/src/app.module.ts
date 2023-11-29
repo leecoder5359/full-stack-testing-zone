@@ -15,6 +15,8 @@ import { typeormConfig } from './config/typeorm.config';
 import { OrderModule } from './order/order.module';
 import { StoreModule } from './store/store.module';
 import { ReviewModule } from './review/review.module';
+import { MenuModule } from './menu/menu.module';
+import { ImageModule } from './image/image.module';
 
 @Module({
     imports: [
@@ -35,6 +37,8 @@ import { ReviewModule } from './review/review.module';
         OrderModule,
         StoreModule,
         ReviewModule,
+        MenuModule,
+        ImageModule,
     ],
     providers: [Logger],
 })

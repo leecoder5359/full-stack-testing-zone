@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 
-export class PageResDto<T> {
+export class PageRes<T> {
     @ApiProperty({ required: true })
     page: number;
 

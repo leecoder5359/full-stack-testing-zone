@@ -1,10 +1,10 @@
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany, ManyToOne, JoinColumn } from 'typeorm';
 import { StoreCategory } from './store.enum';
-import { Menu } from './menu.entity';
-import { Order } from '../../order/entity/order.entity';
-import { User } from '../../user/entity/user.entity';
-import { CommonBigPkEntity } from '../../common/entity/common-big-pk.entity';
-import { Review } from '../../review/entity/review.entity';
+import { Menu } from '../../../menu/entity/menu.entity';
+import { Order } from '../../../order/entity/order.entity';
+import { User } from '../../../user/entity/user.entity';
+import { CommonBigPkEntity } from '../../../common/entity/common-big-pk.entity';
+import { Review } from '../../../review/entity/review.entity';
 
 @Entity()
 export class Store extends CommonBigPkEntity {

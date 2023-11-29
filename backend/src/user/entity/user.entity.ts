@@ -8,7 +8,7 @@ import { RefreshToken } from '../../auth/entity/refresh-token.entity';
 import { Role } from '../enum/user.enum';
 import { Order } from '../../order/entity/order.entity';
 import { CommonBigPkEntity } from '../../common/entity/common-big-pk.entity';
-import { Store } from '../../store/entity/store.entity';
+import { Store } from '../../store/repository/entity/store.entity';
 import { Review } from '../../review/entity/review.entity';
 
 @Entity()
@@ -18,6 +18,9 @@ export class User extends CommonBigPkEntity {
 
     @Column()
     password: string;
+
+    @Column()
+    name: string;
 
     @Column({ type: 'enum', enum: Role })
     role: Role = Role.User;
