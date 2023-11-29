@@ -6,18 +6,24 @@ import { Request } from 'express';
 export class TransformInterceptor<T, R> implements NestInterceptor<T, R> {
     intercept(context: ExecutionContext, next: CallHandler): Observable<R> {
         return next.handle().pipe(
-            map((data) => {
+            map((response) => {
                 const http = context.switchToHttp();
                 const request = http.getRequest<Request>();
+                const data = response?.data;
+                if (Array.isArray(data)) {
+                    response.data = this.transformArrayData(data, request);
+                }
 
-                if (!Array.isArray(data)) return data;
-
-                return {
-                    items: data,
-                    page: Number(request.query['page'] || 1),
-                    size: Number(request.query['size'] || 20),
-                };
+                return response;
             }),
         );
+    }
+
+    private transformArrayData(data: any[], request: Request): any {
+        return {
+            page: Number(request.query['page'] || 1),
+            size: Number(request.query['size'] || 20),
+            items: data,
+        };
     }
 }
