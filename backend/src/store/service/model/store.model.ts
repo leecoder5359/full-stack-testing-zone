@@ -1,4 +1,5 @@
 export class StoreModel {
+    id: number;
     category: string;
     deliveryPrice: number;
     name: string;
@@ -6,4 +7,6 @@ export class StoreModel {
     minimumOrderPrice: number;
     reviewCount: number;
     rating: number;
+    createdAt: Date;
+    updatedAt: Date;
 }

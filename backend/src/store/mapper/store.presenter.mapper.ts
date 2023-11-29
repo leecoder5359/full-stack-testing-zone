@@ -15,6 +15,8 @@ export class StorePresenterMapper {
 
     toRes(model: StoreModel): GetStoreRes {
         const getStoreRes = new GetStoreRes();
+        getStoreRes.id = model.id;
+        getStoreRes.category = model.category;
         getStoreRes.category = model.category;
         getStoreRes.deliveryPrice = model.deliveryPrice;
         getStoreRes.name = model.name;
@@ -22,6 +24,8 @@ export class StorePresenterMapper {
         getStoreRes.minimumOrderPrice = model.minimumOrderPrice;
         getStoreRes.reviewCount = model.reviewCount;
         getStoreRes.rating = model.rating;
+        getStoreRes.createdAt = model.createdAt;
+        getStoreRes.updatedAt = model.updatedAt;
         return getStoreRes;
     }
 }

@@ -1,4 +1,5 @@
 export class GetStoreRes {
+    id: number;
     name: string;
     images: string[];
     category: string;
@@ -6,4 +7,6 @@ export class GetStoreRes {
     rating: number;
     deliveryPrice: number;
     minimumOrderPrice: number;
+    createdAt: Date;
+    updatedAt: Date;
 }

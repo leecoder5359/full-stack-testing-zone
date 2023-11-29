@@ -1,7 +1,7 @@
 import { CreateDateColumn, DeleteDateColumn, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
 
 export class CommonBigPkEntity {
-    @PrimaryGeneratedColumn({ type: 'bigint' })
+    @PrimaryGeneratedColumn()
     id: number;
 
     @CreateDateColumn({ name: 'created_at', type: 'timestamp' })
