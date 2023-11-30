@@ -28,7 +28,7 @@ export class AuthService implements IAuthService {
         model.password = await bcrypt.hash(model.password, 10);
         const createdUser = await this.userService.createUser(model.name, model.email, model.password);
         const userId = createdUser.id;
-        throw new BadRequestException();
+
         const accessToken = this.generateAccessToken(userId);
         const refreshToken = this.generateRefreshToken(userId);
 
