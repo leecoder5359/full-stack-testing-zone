@@ -1,15 +1,20 @@
 import { Logger, Module } from '@nestjs/common';
-import { AuthService } from './auth.service';
+import { AuthService } from './service/auth.service';
 import { PassportModule } from '@nestjs/passport';
 import { UserModule } from 'src/user/user.module';
-import { AuthController } from './auth.controller';
+import { AuthController } from './controller/auth.controller';
 import { JwtModule } from '@nestjs/jwt';
 import { JwtStrategy } from './jwt.strategy';
 import { APP_GUARD } from '@nestjs/core';
 import { JwtAuthGuard } from './jwt-auth.guard';
 import { ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { RefreshToken } from './entity/refresh-token.entity';
+import { RefreshToken } from './repository/entity/refresh-token.entity';
+import { AUTH_SERVICE } from './service/auth.interface';
+import { RefreshTokenPersistenceMapper } from './mapper/refresh-token.persistence.mapper';
+import { REFRESH_TOKEN_REPOSITORY } from './repository/interface/refresh-token-repository.interface';
+import { RefreshTokenRepository } from './repository/refresh-token.repository';
+import { AuthPresenterMapper } from './mapper/auth.presenter.mapper';
 
 @Module({
     imports: [
@@ -28,15 +33,15 @@ import { RefreshToken } from './entity/refresh-token.entity';
         TypeOrmModule.forFeature([RefreshToken]),
     ],
     providers: [
-        AuthService,
+        { provide: AUTH_SERVICE, useClass: AuthService },
+        { provide: REFRESH_TOKEN_REPOSITORY, useClass: RefreshTokenRepository },
+        { provide: APP_GUARD, useClass: JwtAuthGuard },
+        AuthPresenterMapper,
+        RefreshTokenPersistenceMapper,
         JwtStrategy,
-        {
-            provide: APP_GUARD,
-            useClass: JwtAuthGuard,
-        },
         Logger,
     ],
     controllers: [AuthController],
-    exports: [AuthService],
+    exports: [AUTH_SERVICE],
 })
 export class AuthModule {}

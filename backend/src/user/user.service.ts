@@ -27,4 +27,9 @@ export class UserService {
         const user = await this.userRepository.findOneBy({ id });
         return user.role === Role.Admin;
     }
+
+    async createUser(name: string, email: string, password: string) {
+        const user = this.userRepository.create({name, email, password});
+        return await this.userRepository.save(user);
+    }
 }

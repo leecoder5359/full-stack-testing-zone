@@ -1,6 +1,8 @@
 import { ConfigService } from '@nestjs/config';
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { Logger } from '@nestjs/common';
+import { DataSource } from 'typeorm';
+import { addTransactionalDataSource } from 'typeorm-transactional';
 
 export const typeormConfig = {
     inject: [ConfigService],
@@ -26,5 +28,9 @@ export const typeormConfig = {
         console.log('obj', obj);
 
         return obj;
+    },
+    async dataSourceFactory(options) {
+        const dataSource = await new DataSource(options).initialize();
+        return addTransactionalDataSource(dataSource);
     },
 };

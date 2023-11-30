@@ -1,15 +1,12 @@
 import { ApiProperty } from '@nestjs/swagger';
 
-export class PageRes<T> {
+export class SignupRes {
     @ApiProperty({ required: true })
-    page: number;
+    id: number;
 
     @ApiProperty({ required: true })
-    size: number;
+    accessToken: string;
 
     @ApiProperty({ required: true })
-    sort: 'DESC' | 'ASC';
-
-    @ApiProperty({ required: true })
-    items: T[];
+    refreshToken: string;
 }

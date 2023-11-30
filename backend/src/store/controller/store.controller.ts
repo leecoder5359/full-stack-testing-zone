@@ -4,14 +4,20 @@ import { GetStoreReq } from './payload/get-store.req';
 import { CommonRes } from '../../common/dto/common.res';
 import { StoreModel } from '../service/model/store.model';
 import { IStoreService, STORE_SERVICE } from '../service/interface/store-service.interface';
+import { ApiBearerAuth, ApiExtraModels, ApiTags } from '@nestjs/swagger';
+import { GetStoreRes } from './payload/get-store.res';
+import { ApiGetItemsResponse, ApiGetResponse } from '../../common/decorator/swagger.decorator';
 import { Public } from '../../common/decorator/public.decorator';
+import { PageRes } from '../../common/dto/page.res';
 
+@ApiTags('store')
+@ApiExtraModels(CommonRes, PageRes, GetStoreReq, GetStoreRes)
 @Controller('store')
 export class StoreController {
     constructor(@Inject(STORE_SERVICE) private storeService: IStoreService, private mapper: StorePresenterMapper) {}
 
     @Get()
-    @Public()
+    @ApiGetItemsResponse(GetStoreRes)
     async getStores(@Query() getStoreReq: GetStoreReq) {
         const model = this.mapper.toModel(getStoreReq);
         const results = await this.storeService.find(model);
@@ -20,6 +26,8 @@ export class StoreController {
     }
 
     @Get(':id')
+    @ApiGetResponse(GetStoreRes)
+    @ApiBearerAuth()
     async getStore(@Param() id: number) {
         const model = await this.storeService.findById(id);
         return CommonRes.of('가게 조회', this.mapper.toRes(model));

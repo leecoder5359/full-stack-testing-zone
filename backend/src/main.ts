@@ -7,8 +7,11 @@ import * as Sentry from '@sentry/node';
 import { createLogger } from './lib/createLogger';
 import { setupSwagger } from './lib/setup-swagger';
 import { setupMiddleware } from './lib/setup-middleware';
+import { initializeTransactionalContext } from 'typeorm-transactional';
 
 async function bootstrap() {
+    initializeTransactionalContext();
+
     const app = await NestFactory.create(AppModule, {
         logger: createLogger,
     });

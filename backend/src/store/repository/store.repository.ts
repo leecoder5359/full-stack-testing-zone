@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { Repository } from 'typeorm';
+import { FindManyOptions, LessThanOrEqual, MoreThanOrEqual, Repository } from 'typeorm';
 import { Store } from './entity/store.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { GetStoreListModel } from '../service/model/get-store-list.model';
@@ -21,11 +21,24 @@ export class StoreRepository implements IStoreRepository {
     }
 
     async find(model: GetStoreListModel): Promise<StoreModel[]> {
-        const { page, size } = model;
-        const stores = await this.repository.find({
+        const { page, size, minOrderPrice, maxDeliveryPrice } = model;
+
+        const query: FindManyOptions<Store> = {
+            where: {},
             skip: (page - 1) * size,
             take: size,
-        });
+        };
+
+        if (minOrderPrice) {
+            query.where = { ...query.where, minimumOrderPrice: MoreThanOrEqual(minOrderPrice) };
+        }
+
+        if (maxDeliveryPrice) {
+            query.where = { ...query.where, deliveryPrice: LessThanOrEqual(maxDeliveryPrice) };
+        }
+
+        const stores = await this.repository.find(query);
+
         return stores.map((store) => this.mapper.toModel(store));
     }
 

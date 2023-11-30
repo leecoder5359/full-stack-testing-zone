@@ -1,6 +1,6 @@
 import { Column, CreateDateColumn, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
-import { User } from '../../user/entity/user.entity';
-import { CommonBigPkEntity } from '../../common/entity/common-big-pk.entity';
+import { User } from '../../../user/entity/user.entity';
+import { CommonBigPkEntity } from '../../../common/entity/common-big-pk.entity';
 
 @Entity()
 export class RefreshToken extends CommonBigPkEntity {

@@ -4,7 +4,7 @@ import {
     OneToMany,
     OneToOne,
 } from 'typeorm';
-import { RefreshToken } from '../../auth/entity/refresh-token.entity';
+import { RefreshToken } from '../../auth/repository/entity/refresh-token.entity';
 import { Role } from '../enum/user.enum';
 import { Order } from '../../order/entity/order.entity';
 import { CommonBigPkEntity } from '../../common/entity/common-big-pk.entity';

@@ -7,6 +7,9 @@ export class CommonRes<T> {
     @ApiProperty({ required: true, example: '성공시 메세지' })
     message: string;
 
+    @ApiProperty({ required: true, example: '정렬방식' })
+    sort: 'DESC' | 'ASC';
+
     @ApiProperty({ required: true, example: '응답 객체 || 응답 메세지' })
     data: T;
 

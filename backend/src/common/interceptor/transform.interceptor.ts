@@ -23,6 +23,7 @@ export class TransformInterceptor<T, R> implements NestInterceptor<T, R> {
         return {
             page: Number(request.query['page'] || 1),
             size: Number(request.query['size'] || 20),
+            sort: request.query['sort'] || 'DESC',
             items: data,
         };
     }
