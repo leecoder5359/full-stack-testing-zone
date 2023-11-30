@@ -1,7 +1,5 @@
 import { BadRequestException, Inject, Injectable, UnauthorizedException } from '@nestjs/common';
-import { UserService } from 'src/user/user.service';
 import { JwtService } from '@nestjs/jwt';
-import { User } from '../../user/entity/user.entity';
 import * as bcrypt from 'bcrypt';
 import { IAuthService } from './auth.interface';
 import {
@@ -10,14 +8,15 @@ import {
 } from '../repository/interface/refresh-token-repository.interface';
 import { Transactional } from 'typeorm-transactional';
 import { SignupModel } from './model/signup.model';
+import { UserModel } from '../../user/service/model/user.model';
+import { IUserService, USER_SERVICE } from '../../user/service/interface/user-service.interface';
 
 @Injectable()
 export class AuthService implements IAuthService {
     constructor(
-        private userService: UserService,
+        @Inject(USER_SERVICE) private userService: IUserService,
+        @Inject(REFRESH_TOKEN_REPOSITORY) private refreshTokenRepository: IRefreshTokenRepository,
         private jwtService: JwtService,
-        @Inject(REFRESH_TOKEN_REPOSITORY)
-        private refreshTokenRepository: IRefreshTokenRepository,
     ) {}
 
     @Transactional()
@@ -73,18 +72,18 @@ export class AuthService implements IAuthService {
     }
 
     private async createRefreshTokenUsingUser(userId: number, refreshToken: string) {
-        const refreshTokenEntity = await this.refreshTokenRepository.findOneByUserId(userId);
+        const refreshTokenModel = await this.refreshTokenRepository.findOneByUserId(userId);
 
-        if (!refreshToken) {
+        if (!refreshTokenModel) {
             await this.refreshTokenRepository.save({ id: userId }, refreshToken);
             return;
         }
 
-        refreshTokenEntity.token = refreshToken;
-        await this.refreshTokenRepository.merge(refreshTokenEntity);
+        refreshTokenModel.token = refreshToken;
+        await this.refreshTokenRepository.merge(refreshTokenModel);
     }
 
-    private async validateUser(email: string, password: string): Promise<User> {
+    private async validateUser(email: string, password: string): Promise<UserModel> {
         const user = await this.userService.findOneByEmail(email);
         if (!user) throw new UnauthorizedException();
 

@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { UserModel } from '../service/model/user.model';
-import { User } from '../entity/user.entity';
-import { userTransformer } from '../enum/user.enum';
+import { User } from '../repository/entity/user.entity';
+import { userTransformer } from '../repository/enum/user.enum';
 
 @Injectable()
 export class UserPersistenceMapper {

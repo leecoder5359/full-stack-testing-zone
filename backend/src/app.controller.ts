@@ -1,6 +1,6 @@
 import { Controller, Get, Post } from '@nestjs/common';
 import { Repository } from 'typeorm';
-import { User } from './user/entity/user.entity';
+import { User } from './user/repository/entity/user.entity';
 import { Store } from './store/repository/entity/store.entity';
 import { Menu } from './menu/entity/menu.entity';
 import { Review } from './review/entity/review.entity';
@@ -8,7 +8,7 @@ import { faker } from '@faker-js/faker';
 import { StoreCategory } from './store/repository/entity/store.enum';
 import { ratingTransformer } from './review/entity/rating.enum';
 import { Public } from './common/decorator/public.decorator';
-import { Role } from './user/enum/user.enum';
+import { Role } from './user/repository/enum/user.enum';
 import { InjectRepository } from '@nestjs/typeorm';
 
 @Controller()

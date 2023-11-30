@@ -22,7 +22,8 @@ export class RefreshTokenRepository implements IRefreshTokenRepository {
         return this.repository.create({ user, token: refreshToken });
     }
     async save(user: { id: number }, token: string): Promise<void> {
-        await this.repository.save({ user, token });
+        const userEntity = this.repository.create({ user, token });
+        await this.repository.save(userEntity);
     }
 
     async merge(model: RefreshTokenModel): Promise<RefreshTokenModel> {

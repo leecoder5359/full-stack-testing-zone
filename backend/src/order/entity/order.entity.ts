@@ -7,7 +7,7 @@ import {
     PrimaryGeneratedColumn,
 } from 'typeorm';
 import { DeliveryStatusEnum } from './delivery-status.enum';
-import { User } from '../../user/entity/user.entity';
+import { User } from '../../user/repository/entity/user.entity';
 import { OrderMenu } from './order-menu.entity';
 import { Store } from '../../store/repository/entity/store.entity';
 import { CommonBigPkEntity } from '../../common/entity/common-big-pk.entity';

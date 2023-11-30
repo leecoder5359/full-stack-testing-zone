@@ -6,16 +6,16 @@ import { IS_PUBLIC_KEY } from '../common/decorator/public.decorator';
 import { Request } from 'express';
 import { JwtService } from '@nestjs/jwt';
 import { HeaderUtil } from '../common/util/header.util';
-import { Role } from '../user/enum/user.enum';
+import { Role } from '../user/repository/enum/user.enum';
 import { ROLES_KEY } from '../common/decorator/role.decorator';
-import { UserService } from '../user/user.service';
+import { IUserService, USER_SERVICE } from '../user/service/interface/user-service.interface';
 
 @Injectable()
 export class JwtAuthGuard extends AuthGuard('jwt') {
     constructor(
         private reflector: Reflector,
         private jwtService: JwtService,
-        private userService: UserService,
+        @Inject(USER_SERVICE) private userService: IUserService,
         @Inject(Logger) private logger: LoggerService,
     ) {
         super();

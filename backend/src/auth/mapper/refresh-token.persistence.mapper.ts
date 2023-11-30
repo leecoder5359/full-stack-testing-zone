@@ -12,7 +12,6 @@ export class RefreshTokenPersistenceMapper {
         const model = new RefreshTokenModel();
         model.id = refreshToken.id;
         model.token = refreshToken.token;
-        model.user = refreshToken.user;
         model.createdAt = refreshToken.createdAt;
         model.updatedAt = refreshToken.updatedAt;
         model.deletedAt = refreshToken.deletedAt;
@@ -23,7 +22,6 @@ export class RefreshTokenPersistenceMapper {
         const entity = new RefreshToken();
         entity.id = model.id;
         entity.token = model.token;
-        entity.user = this.userMapper.toEntity(model.user);
         entity.createdAt = model.createdAt;
         entity.updatedAt = model.updatedAt;
         entity.deletedAt = model.deletedAt;

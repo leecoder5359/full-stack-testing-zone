@@ -4,12 +4,12 @@ import {
     OneToMany,
     OneToOne,
 } from 'typeorm';
-import { RefreshToken } from '../../auth/repository/entity/refresh-token.entity';
+import { RefreshToken } from '../../../auth/repository/entity/refresh-token.entity';
 import { Role } from '../enum/user.enum';
-import { Order } from '../../order/entity/order.entity';
-import { CommonBigPkEntity } from '../../common/entity/common-big-pk.entity';
-import { Store } from '../../store/repository/entity/store.entity';
-import { Review } from '../../review/entity/review.entity';
+import { Order } from '../../../order/entity/order.entity';
+import { CommonBigPkEntity } from '../../../common/entity/common-big-pk.entity';
+import { Store } from '../../../store/repository/entity/store.entity';
+import { Review } from '../../../review/entity/review.entity';
 
 @Entity()
 export class User extends CommonBigPkEntity {

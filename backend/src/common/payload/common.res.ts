@@ -1,4 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
+import { Sort } from './page.req';
 
 export class CommonRes<T> {
     @ApiProperty({ required: true, example: '성공 여부' })
@@ -8,7 +9,7 @@ export class CommonRes<T> {
     message: string;
 
     @ApiProperty({ required: true, example: '정렬방식' })
-    sort: 'DESC' | 'ASC';
+    sort: Sort;
 
     @ApiProperty({ required: true, example: '응답 객체 || 응답 메세지' })
     data: T;

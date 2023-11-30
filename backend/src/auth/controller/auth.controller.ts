@@ -13,7 +13,7 @@ import { SigninReq } from './payload/request/signin.req';
 import { AUTH_SERVICE, IAuthService } from '../service/auth.interface';
 import { AuthPresenterMapper } from '../mapper/auth.presenter.mapper';
 import { SignupResultModel } from '../service/model/signup-result.model';
-import { CommonRes } from '../../common/dto/common.res';
+import { CommonRes } from '../../common/payload/common.res';
 
 @ApiTags('Auth')
 @ApiExtraModels(CommonRes, SignupRes, SigninRes, RefreshRes)

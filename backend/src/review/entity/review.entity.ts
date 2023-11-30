@@ -1,6 +1,6 @@
 import { CommonBigPkEntity } from '../../common/entity/common-big-pk.entity';
 import { Column, Entity, JoinColumn, JoinTable, ManyToMany, ManyToOne, OneToMany } from 'typeorm';
-import { User } from '../../user/entity/user.entity';
+import { User } from '../../user/repository/entity/user.entity';
 import { Menu } from '../../menu/entity/menu.entity';
 import { Store } from '../../store/repository/entity/store.entity';
 import { RatingEnum } from './rating.enum';

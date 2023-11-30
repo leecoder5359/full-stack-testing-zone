@@ -1,14 +1,14 @@
 import { Controller, Get, Inject, Param, Query } from '@nestjs/common';
 import { StorePresenterMapper } from '../mapper/store.presenter.mapper';
 import { GetStoreReq } from './payload/get-store.req';
-import { CommonRes } from '../../common/dto/common.res';
+import { CommonRes } from '../../common/payload/common.res';
 import { StoreModel } from '../service/model/store.model';
 import { IStoreService, STORE_SERVICE } from '../service/interface/store-service.interface';
 import { ApiBearerAuth, ApiExtraModels, ApiTags } from '@nestjs/swagger';
 import { GetStoreRes } from './payload/get-store.res';
 import { ApiGetItemsResponse, ApiGetResponse } from '../../common/decorator/swagger.decorator';
 import { Public } from '../../common/decorator/public.decorator';
-import { PageRes } from '../../common/dto/page.res';
+import { PageRes } from '../../common/payload/page.res';
 
 @ApiTags('store')
 @ApiExtraModels(CommonRes, PageRes, GetStoreReq, GetStoreRes)

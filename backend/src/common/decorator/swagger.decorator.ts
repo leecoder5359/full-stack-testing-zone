@@ -1,7 +1,7 @@
 import { ApiCreatedResponse, ApiOkResponse, getSchemaPath } from '@nestjs/swagger';
 import { applyDecorators, Type } from '@nestjs/common';
-import { CommonRes } from '../dto/common.res';
-import { PageRes } from '../dto/page.res';
+import { CommonRes } from '../payload/common.res';
+import { PageRes } from '../payload/page.res';
 
 export const ApiGetResponse = <TModel extends Type<any>>(model: TModel) => {
     return applyDecorators(

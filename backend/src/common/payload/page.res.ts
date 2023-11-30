@@ -1,4 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
+import { Sort } from './page.req';
 
 export class PageRes<T> {
     @ApiProperty({ required: true })
@@ -8,7 +9,7 @@ export class PageRes<T> {
     size: number;
 
     @ApiProperty({ required: true })
-    sort: 'DESC' | 'ASC';
+    sort: Sort;
 
     @ApiProperty({ required: true })
     items: T[];
