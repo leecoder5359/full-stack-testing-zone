@@ -7,16 +7,16 @@ import { IStoreService, STORE_SERVICE } from '../service/interface/store-service
 import { ApiBearerAuth, ApiExtraModels, ApiTags } from '@nestjs/swagger';
 import { GetStoreRes } from './payload/get-store.res';
 import { ApiGetItemsResponse, ApiGetResponse } from '../../common/decorator/swagger.decorator';
-import { Public } from '../../common/decorator/public.decorator';
 import { PageRes } from '../../common/payload/page.res';
 
 @ApiTags('store')
 @ApiExtraModels(CommonRes, PageRes, GetStoreReq, GetStoreRes)
-@Controller('store')
+@Controller('api/store')
 export class StoreController {
     constructor(@Inject(STORE_SERVICE) private storeService: IStoreService, private mapper: StorePresenterMapper) {}
 
     @Get()
+    @ApiBearerAuth()
     @ApiGetItemsResponse(GetStoreRes)
     async getStores(@Query() getStoreReq: GetStoreReq) {
         const model = this.mapper.toModel(getStoreReq);

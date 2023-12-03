@@ -21,10 +21,13 @@ export class StoreRepository implements IStoreRepository {
     }
 
     async find(model: GetStoreListModel): Promise<StoreModel[]> {
-        const { page, size, minOrderPrice, maxDeliveryPrice } = model;
+        const { page, size, sort, minOrderPrice, maxDeliveryPrice } = model;
 
         const query: FindManyOptions<Store> = {
             where: {},
+            order: {
+                id: sort,
+            },
             skip: (page - 1) * size,
             take: size,
         };

@@ -5,9 +5,6 @@ import { UserPersistenceMapper } from '../../user/mapper/user.persistence.mapper
 
 @Injectable()
 export class RefreshTokenPersistenceMapper {
-    constructor(private userMapper: UserPersistenceMapper) {
-    }
-
     toModel(refreshToken: RefreshToken): RefreshTokenModel {
         const model = new RefreshTokenModel();
         model.id = refreshToken.id;

@@ -1,4 +1,6 @@
-export class GetStoreListModel {
-    page: number;
-    size: number;
+import { PageModel } from '../../../common/model/page.model';
+
+export class GetStoreListModel extends PageModel {
+    minOrderPrice: number;
+    maxDeliveryPrice: number;
 }

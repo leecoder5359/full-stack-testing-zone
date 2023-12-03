@@ -1,8 +1,8 @@
-import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
+import { ApiPropertyOptional } from '@nestjs/swagger';
 import { Transform } from 'class-transformer';
 import { IsInt } from 'class-validator';
+import { PageSort } from '../types/page-sort.type';
 
-export type Sort = 'DESC' | 'ASC';
 export class PageReq {
     @ApiPropertyOptional({ description: '페이지. default = 20' })
     @Transform((params) => Number(params.value))
@@ -15,5 +15,5 @@ export class PageReq {
     size?: number = 20;
 
     @ApiPropertyOptional({ description: '정렬 방법. default = DESC' })
-    sort?: Sort = 'DESC';
+    sort?: PageSort = 'DESC';
 }

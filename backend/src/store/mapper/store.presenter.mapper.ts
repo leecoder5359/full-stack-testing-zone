@@ -10,6 +10,7 @@ export class StorePresenterMapper {
         const getStoreListModel = new GetStoreListModel();
         getStoreListModel.page = req.page;
         getStoreListModel.size = req.size;
+        getStoreListModel.sort = req.sort;
         getStoreListModel.minOrderPrice = req.minOrderPrice;
         getStoreListModel.maxDeliveryPrice = req.maxDeliveryPrice;
         return getStoreListModel;
